@@ -1,0 +1,29 @@
+# The default microservice configuration, security credentials should be
+# set with enviroment variables, every key on this config has a env var
+# equivalent that sets or overrides the config on this file.
+#
+# Commented properties on this file are sensitive and should be set only
+# by the their env var equivalent, in development they can be hardcoded
+# within the config.dev.yml file
+
+app:
+  debug: false                              # APP_DEBUG
+
+mail:
+  sender: "replace-me@hotmail.com"          # MAIL_SENDER
+  retry_wait_time: 3                        # MAIL_RETRY_WAIT_TIME
+  max_retry_attempts: 4                     # MAIL_MAX_RETRY_ATTEMPTS
+
+rmq:
+  # url:                                    # RMQ_URL
+  exchange: "mailer"                        # RMQ_EXCHANGE
+  reconnect_wait_time: 5                    # RMQ_RECONNECT_WAIT_TIME
+
+tracer:
+  url: "http://localhost:14268/api/traces"  # TRACER_URL
+  service_name: "mail_sender"               # TRACER_SERVICE_NAME
+
+aws:
+  region: "us-east-1"                       # AWS_REGION
+  # access_key_id:                          # AWS_ACCESS_KEY_ID
+  # secret_access_key:                      # AWS_SECRET_ACCESS_KEY
