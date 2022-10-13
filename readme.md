@@ -1,6 +1,6 @@
 # Mail Sender
 
-This service is only responsible for validating sending requests and interacting to the AWS/SES to send email requests, it also publishes 
+Service for validating sending requests and interacting to the AWS/SES to send email requests, it also publishes 
 success or failures events regarding the sending attempts. 
 
 Note that a success event only means the email has been queued for sending successfully, not that it arrived in the repicient(s) inbox, 
@@ -46,4 +46,3 @@ check `config/config.yml` for details.
 
 when developing its easier to use the yml equivalent of those variables on your `config/config.dev.yml` file and running the service
 with `make run_dev` or `go run cmd/main.go --config-file="./config/config.dev.yml"`
-
