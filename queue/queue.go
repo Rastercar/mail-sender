@@ -22,6 +22,7 @@ type Server struct {
 	deliveries  <-chan amqp.Delivery
 	notifyClose chan *amqp.Error
 
+	// The function to invoke on a new goroutine whenever a new delivery is consumed on the mail requests queue
 	ConsumerFn func(deliver *amqp.Delivery)
 }
 

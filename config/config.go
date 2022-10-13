@@ -17,6 +17,7 @@ type AppConfig struct {
 type MailConfig struct {
 	Sender           string `env-required:"true" yaml:"sender" env:"MAIL_SENDER"`
 	RetryWaitTime    int    `env-required:"true" yaml:"retry_wait_time" env:"MAIL_RETRY_WAIT_TIME"`
+	ReqPerSecLimit   int    `env-required:"true" yaml:"req_per_sec_limit" env:"MAIL_REQ_PER_SEC_LIMIT"`
 	MaxRetryAttempts int    `env-required:"true" yaml:"max_retry_attempts" env:"MAIL_MAX_RETRY_ATTEMPTS"`
 }
 
@@ -27,7 +28,7 @@ type TracerConfig struct {
 
 type RmqConfig struct {
 	Url               string `env-required:"true" yaml:"url" env:"RMQ_URL"`
-	Exchange          string `env-required:"true" yaml:"exchange" env:"RMQ_EXCHANGE"`
+	Queue             string `env-required:"true" yaml:"queue" env:"RMQ_QUEUE"`
 	ReconnectWaitTime int    `env-required:"true" yaml:"reconnect_wait_time" env:"RMQ_RECONNECT_WAIT_TIME"`
 }
 

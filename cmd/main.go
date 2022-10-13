@@ -7,6 +7,9 @@ import (
 	"mailer-ms/mail"
 	"mailer-ms/queue"
 	"mailer-ms/tracer"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 // The version/build, this gets replaced at build time to the commit SHA
@@ -36,11 +39,15 @@ func main() {
 	defer tracer.Stop(ctx)
 
 	queue := queue.New(cfg.Rmq)
-
 	mailer := mail.New(cfg, &queue)
 
 	queue.ConsumerFn = mailer.HandleMailRequestDelivery
 
 	queue.Start()
 	defer queue.Stop()
+
+	exit := make(chan os.Signal, 1)
+	signal.Notify(exit, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
+	<-exit
 }

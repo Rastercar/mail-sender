@@ -59,21 +59,29 @@ func (s *Server) connect() {
 			continue
 		}
 
-		// TODO: DECLARE AND BIND QUEUES HERE
-		err = channel.ExchangeDeclare(
-			s.cfg.Exchange, // name
-			"topic",        // kind
-			true,           // durable
-			false,          // auto-deleted
-			false,          // internal
-			false,          // no-wait
-			nil,            // args
+		_, err = channel.QueueDeclare(
+			s.cfg.Queue, // name
+			true,        // durable
+			false,       // autodelete
+			false,       // exclusive
+			false,       // nowait
+			nil,         // args
 		)
-
-		// Its intentional to panic here as we NEED the queues and exchanges
-		// to be successfully declared for this service to function correctly
 		if err != nil {
 			log.Fatalf("[ RMQ ] failed to declare exchange: %v ", err)
+		}
+
+		s.deliveries, err = channel.Consume(
+			s.cfg.Queue, // queue
+			"",          // consumer
+			false,       // autoack
+			false,       // exclusive
+			false,       // nolocal
+			false,       // nowait
+			nil,         // args
+		)
+		if err != nil {
+			log.Fatalf("[ RMQ ] failed to consume mail requests queue: %v ", err)
 		}
 
 		s.conn = con

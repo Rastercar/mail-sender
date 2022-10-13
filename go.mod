@@ -8,12 +8,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.18
 	github.com/go-playground/validator/v10 v10.11.1
 	github.com/golang/mock v1.6.0
+	github.com/google/uuid v1.3.0
 	github.com/ilyakaznacheev/cleanenv v1.4.0
 	github.com/rabbitmq/amqp091-go v1.5.0
 	go.opentelemetry.io/otel v1.10.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.10.0
 	go.opentelemetry.io/otel/sdk v1.10.0
 	go.opentelemetry.io/otel/trace v1.10.0
+	golang.org/x/time v0.0.0-20220922220347-f3bd1da661af
 )
 
 require (

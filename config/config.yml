@@ -12,11 +12,12 @@ app:
 mail:
   sender: "replace-me@hotmail.com"          # MAIL_SENDER
   retry_wait_time: 3                        # MAIL_RETRY_WAIT_TIME
+  req_per_sec_limit: 5                      # MAIL_REQ_PER_SEC_LIMIT
   max_retry_attempts: 4                     # MAIL_MAX_RETRY_ATTEMPTS
 
 rmq:
   # url:                                    # RMQ_URL
-  exchange: "mailer"                        # RMQ_EXCHANGE
+  queue: "mail_requests"                    # RMQ_QUEUE
   reconnect_wait_time: 5                    # RMQ_RECONNECT_WAIT_TIME
 
 tracer:

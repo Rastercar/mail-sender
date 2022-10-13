@@ -1,6 +1,8 @@
 package mail
 
 type SendEmailDto struct {
+	Uuid string `json:"uuid" validate:"required"`
+
 	// Email adresses to send the email to
 	To []string `json:"to" validate:"dive,email"`
 
@@ -28,4 +30,10 @@ type SendEmailDto struct {
 
 	// Email html content
 	BodyHtml string `json:"body_html" validate:"required"`
+}
+
+type SendEmailRes struct {
+	Success bool `json:"success"`
+	// Generic message describring the success or error
+	Message string `json:"message"`
 }
