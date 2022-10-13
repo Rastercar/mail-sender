@@ -114,6 +114,12 @@ func (m *Mailer) HandleMailRequestDelivery(d *amqp091.Delivery) {
 		return
 	}
 
+	if recipientCnt == 0 {
+		span.SetStatus(codes.Error, "email has no recipients")
+		m.handleMailRequestResult(ctx, d, errors.New("email recipient count is over 50"))
+		return
+	}
+
 	if err := m.validate.Struct(dto); err != nil {
 		tracer.AddSpanErrorAndFail(span, err, "invalid email request")
 		m.handleMailRequestResult(ctx, d, fmt.Errorf("validation error: %w", err))
